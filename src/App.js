@@ -10,6 +10,7 @@ export const App = () => {
   const [dogUrl, setDogUrl] = useState(
     'https://images.dog.ceo/breeds/spaniel-brittany/n02101388_6057.jpg',
   )
+
   return (
     <div>
       <header>
@@ -20,13 +21,16 @@ export const App = () => {
       <div>
         <button
           onClick={() =>
-            setDogUrl(
-              'https://images.dog.ceo/breeds/hound-english/n02089973_1132.jpg',
+            fetch(
+              'https://dog.ceo/api/breeds/image/random',
             )
+              .then(response => response.json())
+              .then(data => setDogUrl(data.message))
           }
         >
           更新
         </button>
+        {dogUrl}
       </div>
     </div>
   )
