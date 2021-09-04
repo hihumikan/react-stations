@@ -1,5 +1,5 @@
 import React from 'react'
 
 export function DogImage(params) {
-  return <img src={params.src} />
+  return <img src={params.url} />
 }

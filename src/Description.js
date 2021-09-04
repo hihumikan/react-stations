@@ -9,7 +9,7 @@ export function Description() {
     <div>
       <div className="content">
         <p>犬の画像を表示するサイトです</p>
-        <DogImage src={dogUrl} />
+        <DogImage url={dogUrl} />
       </div>
       <div>
         <button
