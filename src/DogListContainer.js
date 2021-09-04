@@ -10,18 +10,36 @@ export function DogListContainer() {
       })
   }, [])
   const [breeds, setBreeds] = useState([])
-  const [selectedBreed, setSelectedBreed] = useState('none')
-  const handleClick = event => {
-    setSelectedBreed(event.target.value)
+  const [selectedBreed, setSelectedBreed] = useState('')
+  const [OnceBreeds, setOnceBreeds] = useState([])
+  const handleSelectBreed = breed => {
+    setSelectedBreed(breed)
   }
+  const createUriMethod = breed => {
+    return `https://dog.ceo/api/breed/${breed}/images/random/12`
+  }
+
   return (
     <div>
       <BreedsSelect
         breeds={breeds}
         selectedBreed={selectedBreed}
-        setSelectedBreed={handleClick}
+        onSelectBreed={handleSelectBreed}
       />
       <p>{selectedBreed}</p>
+      <button
+        className="button"
+        onClick={() =>
+          fetch(createUriMethod(selectedBreed))
+            .then(response => response.json())
+            .then(data => setOnceBreeds(data.message))
+        }
+      >
+        表示
+      </button>
+      {OnceBreeds.map((breed, i) => (
+        <img key={i} src={breed} />
+      ))}
     </div>
   )
 }
